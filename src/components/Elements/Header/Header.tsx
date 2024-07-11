@@ -8,6 +8,11 @@ const Header: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const logout = () => {
+    localStorage.removeItem('token'); // Supprime le token du localStorage
+    navigate('/se-connecter'); // Redirige l'utilisateur vers la page de connexion
+  };
+
   let buttons;
   if (
     ['/', '/s-inscrire', '/resultat', '/mentions-legales', '/faq'].includes(
@@ -30,13 +35,15 @@ const Header: React.FC = () => {
     buttons = (
       <div>
         <button onClick={() => navigate('/mon-compte')}>Mon Compte</button>
-        <button onClick={() => navigate('/se-connecter')}>Déconnexion</button>
+        <button onClick={logout}>Déconnexion</button>{' '}
+        {/* Utilise la fonction logout */}
       </div>
     );
   } else if (location.pathname === '/mon-compte') {
     buttons = (
       <div>
-        <button onClick={() => navigate('/se-connecter')}>Déconnexion</button>
+        <button onClick={logout}>Déconnexion</button>{' '}
+        {/* Utilise la fonction logout */}
       </div>
     );
   } else if (location.pathname === '/se-connecter') {

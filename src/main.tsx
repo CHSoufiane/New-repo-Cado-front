@@ -18,9 +18,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/Elements/Header/Header';
 import Footer from './components/Elements/Footer/Footer';
 
-
 import './styles/index.scss';
-
 
 const App = () => {
   return (
@@ -30,8 +28,22 @@ const App = () => {
       <Routes>
         <Route path="/se-connecter" element={<Login />} />
         <Route path="/s-inscrire" element={<SignUp />} />
-        <Route path="/creer-un-evenement" element={<CreateEvent />} />
-        <Route path="/resultat" element={<DrawResult />} />
+        <Route
+          path="/creer-un-evenement"
+          element={
+            <ProtectedRoute>
+              <CreateEvent />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/resultat"
+          element={
+            <ProtectedRoute>
+              <DrawResult />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/details-evenement" element={<EventDetails />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/" element={<HomePage />} />
@@ -68,4 +80,3 @@ const App = () => {
 };
 
 ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
-
