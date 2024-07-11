@@ -1,22 +1,42 @@
 import './MyEvents.scss';
-// import Header from '../../Elements/Header/Header';
-// import Footer from '../../Elements/Footer/Footer';
+import React, { useState } from 'react';
 
 function MyEvent() {
+  const [selectedEvent, setSelectedEvent] = useState<string>('');
+
+  const handleEventClick = (event: string) => {
+    setSelectedEvent(event);
+  };
+
   return (
     <div className="WebsiteName">
       <header className="Website__Title">
         <h1>Mes évènements</h1>
       </header>
       <div className="MyEvent">
-        <p>Evenements 1</p>
-        <p>Evenements 2</p>
-        <p>Evenements 3</p>
-        <p>Evenements 4</p>
+        <button type="button" onClick={() => handleEventClick('Événement 1')}>
+          Événements 1
+        </button>
+        <button type="button" onClick={() => handleEventClick('Événement 2')}>
+          Événements 2
+        </button>
+        <button type="button" onClick={() => handleEventClick('Événement 3')}>
+          Événements 3
+        </button>
+        <button type="button" onClick={() => handleEventClick('Événement 4')}>
+          Événements 4
+        </button>
 
-        <h2>Nouvel évènement</h2>
+        {selectedEvent && (
+          <div>
+            <h2>{selectedEvent}</h2>
+            <p>Détails de l&apos;événement...</p>
+          </div>
+        )}
+
+        <h2>Nouvel événement</h2>
         <button className="MyEvent__confirmation" type="submit">
-          Créer un évènement
+          Créer un événement
         </button>
       </div>
     </div>

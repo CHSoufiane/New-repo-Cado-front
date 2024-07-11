@@ -1,73 +1,57 @@
+import React, { useState } from 'react';
+import { myEvents } from '../MyEvents/MyEvents';
 import './EventDetails.scss';
 
-function EventDetails() {
+interface Participant {
+  name: string;
+  email: string;
+}
+
+interface Event {
+  name: string;
+  date: string;
+  participants: Participant[];
+}
+
+const EventDetails: React.FC = () => {
+  const [event, setEvent] = useState<Event>(myEvents[0]); // Utilisez le premier événement comme état initial
+
   return (
     <div className="event-details-page">
       <button className="myevents-button"> Tous mes évènements</button>
-      <h1 className="event-details__title">Nom de l'évènement</h1>
+      <h1 className="event-details__title">{event.name}</h1>
 
       <form className="event-details">
         <div className="event-details__element">
           <h3>Nom de l'évènement :</h3>
-          <input type="text" placeholder="Nom de l'évènement" />
+          <input type="text" value={event.name} readOnly />
         </div>
         <div className="event-details__element">
           <h3>Date de l'évènement :</h3>
-          <input type="text" placeholder="JJ/MM/AAAA" />
-        </div>
-        <div className="event-details__element">
-          <h3>Description :</h3>
-          <input type="text" placeholder="Description" />
+          <input type="text" value={event.date} readOnly />
         </div>
         <div className="event-details__element">
           <h3>Participants :</h3>
-
-          <div className="event-details__participants">
-            <div className="event-details__participant">
+          {event.participants.map((participant, index) => (
+            <div key={index} className="event-details__participant">
               <input
                 className="event-details__participant__input-name"
                 type="text"
-                placeholder="Nom du participant"
+                value={participant.name}
+                readOnly
               />
               <input
                 className="event-details__participant__input-email"
                 type="text"
-                placeholder="E-mail du participant"
+                value={participant.email}
+                readOnly
               />
             </div>
-            <div className="event-details__participant">
-              <input
-                className="event-details__participant__input-name"
-                type="text"
-                placeholder="Nom du participant"
-              />
-              <input
-                className="event-details__participant__input-email"
-                type="text"
-                placeholder="E-mail du participant"
-              />
-            </div>
-            <button className="event-details__participants__add-button">
-              +
-            </button>
-          </div>
-        </div>
-        <div className="event-details__element">
-          <h3>Budget :</h3>
-          <input type="text" placeholder="Budget maximum par cadeau" />
-        </div>
-
-        <div className="event-details__buttons-container">
-          <button className="event-details__save-button">
-            Enregistrer les modifications
-          </button>
-          <button className="event-details__delete-button">
-            Supprimer l'évènement
-          </button>
+          ))}
         </div>
       </form>
     </div>
   );
-}
+};
 
 export default EventDetails;
