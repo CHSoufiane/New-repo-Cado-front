@@ -35,7 +35,7 @@ function MyEvent() {
         )}
 
         <h2>Nouvel événement</h2>
-        <button className="MyEvent__confirmation" type="submit">
+        <button className="MyEvent__confirmation" type="button">
           Créer un événement
         </button>
       </div>
