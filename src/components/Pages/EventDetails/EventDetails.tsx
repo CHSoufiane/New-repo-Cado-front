@@ -46,7 +46,7 @@ const EventDetails: React.FC = () => {
     const fetchData = async () => {
       try {
         // Effectue la requête API et met à jour l'état de l'événement avec les données reçues
-        const response = await fetch('URL_API');
+        const response = await fetch('http://165.227.232.51:3000/create-event');
         const data = await response.json();
         setEvent(data);
       } catch (error) {
