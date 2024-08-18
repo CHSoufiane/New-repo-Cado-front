@@ -1,6 +1,6 @@
 import './PersonalData.scss';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 
 const PersonalData = () => {
   const [userData, setUserData] = useState({
@@ -8,6 +8,8 @@ const PersonalData = () => {
     email: '',
     password: '',
   });
+
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -23,23 +25,59 @@ const PersonalData = () => {
           password: data.password,
         });
       } catch (error) {
-        console.error(
-          'Erreur lors de la récupération des données utilisateur:',
-          error
-        );
+        reportError({
+          message: 'Erreur lors de la récupération de vos données utilisateur:',
+          error,
+        });
       }
     };
 
     fetchUserData();
   }, []);
 
-  // const handleChange = () => {
-  //   const {name, value } =
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-  // }
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  const hidePassword = () => {
-    return '*'.repeat(10);
+    try {
+      const response = await fetch(`https://localhost:3000/me`, {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        const updatedData = await response.json();
+        setUserData(updatedData);
+        setIsEditing(false);
+        alert('Données mises à jour avec succès');
+      } else {
+        alert('Erreur lors de la mise à jour des données');
+      }
+    } catch (error) {
+      reportError({
+        message: 'Erreur lors de la mise à jour de vos données utilisateur:',
+        error,
+      });
+    }
+  };
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancelClick = () => {
+    setIsEditing(false);
   };
 
   return (
@@ -48,21 +86,71 @@ const PersonalData = () => {
         <h1 className="PersonalData__Title">Données personnelles</h1>
       </header>
       <div className="PersonalData__details">
-        <div>
-          <h2 className="PersonalData__item">
-            <strong>Nom :</strong> {userData.name}
-          </h2>
-          <h2 className="PersonalData__item">
-            <strong>Email :</strong> {userData.email}
-          </h2>
-          <h2 className="PersonalData__item">
-            <strong>Mot de passe :</strong> {hidePassword()}
-          </h2>
-        </div>
-        {/* <button onClick={handleSave}>Enregistrer</button> 
-
-        Ce bouton sera utilisé si on met en place les modifications
-        de données personnelles */}
+        {isEditing ? (
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label className="PersonalData__item">
+                <strong>Nom :</strong>
+                <input
+                  type="text"
+                  name="name"
+                  value={userData.name}
+                  onChange={handleChange}
+                  aria-label="Entrez votre nom"
+                />
+              </label>
+              <label className="PersonalData__item">
+                <strong>Email :</strong>
+                <input
+                  type="email"
+                  name="email"
+                  value={userData.email}
+                  onChange={handleChange}
+                  aria-label="Entrez votre adresse e-mail"
+                />
+              </label>
+              <label className="PersonalData__item">
+                <strong>Mot de passe :</strong>
+                <input
+                  type="password"
+                  name="password"
+                  value={userData.password}
+                  onChange={handleChange}
+                  aria-label="Entrez votre mot de passe"
+                />
+              </label>
+            </div>
+            <button type="submit" aria-label="Enregistrer les modifications">
+              Enregistrer
+            </button>
+            <button
+              type="button"
+              onClick={handleCancelClick}
+              aria-label="Annuler les modifications"
+            >
+              Annuler
+            </button>
+            <button
+              onClick={handleEditClick}
+              aria-label="Modifier les données personnelles"
+            >
+              Modifier
+            </button>
+          </form>
+        ) : (
+          <div>
+            <h2 className="PersonalData__item">
+              <strong>Nom :</strong> {userData.name}
+            </h2>
+            <h2 className="PersonalData__item">
+              <strong>Email :</strong> {userData.email}
+            </h2>
+            <h2 className="PersonalData__item">
+              <strong>Mot de passe :</strong>
+              {'*'.repeat(10)}
+            </h2>
+          </div>
+        )}
       </div>
     </div>
   );
