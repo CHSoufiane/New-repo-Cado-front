@@ -47,11 +47,12 @@ const PersonalData = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch(`https://localhost:3000/me`, {
+      const response = await fetch('http://localhost:3000/me', {
+        // Utilisez le bon URL si besoin
         method: 'PATCH',
         credentials: 'include',
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),
       });
@@ -62,13 +63,17 @@ const PersonalData = () => {
         setIsEditing(false);
         alert('Données mises à jour avec succès');
       } else {
+        // Affichez le message d'erreur si le serveur répond avec un statut d'erreur
+        const errorText = await response.text();
+        console.error('Erreur de mise à jour:', errorText);
         alert('Erreur lors de la mise à jour des données');
       }
     } catch (error) {
-      reportError({
-        message: 'Erreur lors de la mise à jour de vos données utilisateur:',
-        error,
-      });
+      console.error(
+        'Erreur lors de la mise à jour de vos données utilisateur:',
+        error
+      );
+      alert('Erreur lors de la mise à jour de vos données utilisateur');
     }
   };
 
@@ -130,12 +135,6 @@ const PersonalData = () => {
             >
               Annuler
             </button>
-            <button
-              onClick={handleEditClick}
-              aria-label="Modifier les données personnelles"
-            >
-              Modifier
-            </button>
           </form>
         ) : (
           <div>
@@ -149,6 +148,12 @@ const PersonalData = () => {
               <strong>Mot de passe :</strong>
               {'*'.repeat(10)}
             </h2>
+            <button
+              onClick={handleEditClick}
+              aria-label="Modifier les données personnelles"
+            >
+              Modifier
+            </button>
           </div>
         )}
       </div>
