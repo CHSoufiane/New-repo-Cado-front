@@ -1,8 +1,10 @@
 import './MyAccount.scss';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useAuth } from '../../../Hooks/useAuth';
 
 const MyAccount = () => {
+  useAuth();
   const [user, setUser] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();

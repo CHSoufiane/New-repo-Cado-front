@@ -1,6 +1,7 @@
 import './PersonalData.scss';
-
+import DOMPurify from 'dompurify';
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
+import { escapeHtml } from '../../../Hooks/escapeHtml';
 
 const PersonalData = () => {
   const [userData, setUserData] = useState({
@@ -8,6 +9,10 @@ const PersonalData = () => {
     email: '',
     password: '',
   });
+
+  const safeContent = escapeHtml(JSON.stringify(userData));
+
+  const cleanData = DOMPurify.sanitize(JSON.stringify(userData));
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -87,6 +92,8 @@ const PersonalData = () => {
 
   return (
     <div className="PersonalData">
+      {cleanData}
+      {safeContent}
       <header>
         <h1 className="PersonalData__Title">Données personnelles</h1>
       </header>
