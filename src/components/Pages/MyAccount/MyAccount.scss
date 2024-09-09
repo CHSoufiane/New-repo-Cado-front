@@ -7,52 +7,23 @@
 }
 
 .MyAccount-WelcomeMessage,
-.MyAccount-EventsMessage,
-h2 {
+.MyAccount-EventsMessage
+{
   text-align: center;
 }
 
-h2 {
-  margin-top: 3rem;
-}
 
 .MyAccount__personalData,
 .MyAccount__MyEvents,
 .MyAccount__CreateEvent {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 2.5rem;
-  margin-left: 3rem;
-  width: 10%;
-  padding: 0.5rem;
-  padding-left: 1.1rem;
-  border-radius: 0.5rem;
-  border: none;
-  background: #000000;
-  color: #dfdedf;
-}
-
-.MyAccount__personalData {
-  position: fixed;
-  top: 10rem;
-}
-
-.MyAccount__MyEvents {
-  position: fixed;
-  top: 15rem;
-}
-
-.MyAccount__CreateEvent {
-  position: fixed;
-  top: 20rem;
-}
-
-.MyAccount__MyEvents {
-  padding-left: 2.2rem;
-}
-
-.MyAccount__CreateEvent {
-  padding-left: 1.8rem;
+  margin: 1.5rem auto;
+  width: 20rem;
+  padding: 0.7rem 1.5rem;
+  justify-content: center;
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 10px 5px 5px rgb(90, 89, 89);
+  }
 }
 
 .LoadingPage {
@@ -68,7 +39,29 @@ h2 {
 }
 
 .MyAccount-WelcomeMessage {
-  color: #ffc547; /* Une couleur rouge-orange vif */
+  color: #e6b069; /* Une couleur rouge-orange vif */
   font-size: 3em; /* Une taille de police plus grande pour plus d'impact */
   text-shadow: 2px 2px 4px #000000; /* Une ombre portée pour donner du relief au texte */
+}
+
+.MyAccount {
+  background-image: url('/src/assets/30.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 30%;
+  overflow: hidden;
+  background-attachment: fixed;
+  padding-bottom: 18.8vh;
+}
+
+.MyAccount__Buttons {
+  margin-top: 5rem;
+}
+
+@media (max-width: 720px) {
+  .MyAccount__h1 {
+    font-size: 3rem;
+    width: 80%;
+    margin: auto;
+  }
 }

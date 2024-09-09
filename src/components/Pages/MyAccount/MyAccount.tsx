@@ -1,42 +1,67 @@
-// Importing necessary libraries and components
 import './MyAccount.scss';
-import { Link } from 'react-router-dom';
-// src/components/Pages/MyAccount/MyAccount.tsx
-
-import { useAuth } from '../../../Hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const MyAccount = () => {
-  const { authData } = useAuth();
-
-  if (!authData || !authData.user) {
-    return <div>Veuillez vous connecter.</div>;
-  }
+  const [user, setUser] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('https://cado.zapto.org/me', {
+          method: 'GET',
+          credentials: 'include', // Assurez-vous que les cookies sont inclus dans la requête
+        });
+        const data = await response.json();
+        console.log('data', data);
+        if (response.ok) {
+          setUser(data); // Stockez les informations utilisateur
+        } else {
+          setError(data.message);
+        }
+      } catch (err) {
+        setError('An error occurred. Please try again.');
+      }
+    };
+    fetchUserData();
+  }, []);
 
   return (
     <div className="MyAccount">
       <header className="MyAccount-title">
-        <h1>Mon compte</h1>
+        <h1 className="MyAccount__h1">Mon compte</h1>
       </header>
       <p className="MyAccount-WelcomeMessage">
-        Bienvenue {authData.user.name.toUpperCase()}!
+
+        Bienvenue {''}
+        {user?.name?.charAt(0).toUpperCase() +
+          user?.name?.slice(1).toLowerCase()}      
+        {''} !
       </p>
-      <h2>IMAGE A TROUVER</h2>
       <div className="MyAccount__Buttons">
-        <Link
-          to="/mes-donnees-personnelles"
+        <button
           className="MyAccount__personalData"
+          onClick={() => navigate('/mes-donnees-personnelles')}
         >
           Données personnelles
-        </Link>
-        <Link to="/mes-evenements" className="MyAccount__MyEvents">
+        </button>
+
+        <button
+          className="MyAccount__MyEvents"
+          onClick={() => navigate('/mes-evenements')}
+        >
           Mes évènements
-        </Link>
-        <Link to="/creer-un-evenement" className="MyAccount__CreateEvent">
-          Nouvel évènement
-        </Link>
+        </button>
+
+        <button
+          className="MyAccount__CreateEvent"
+          onClick={() => navigate('/creer-un-evenement')}
+        >
+          Créer un évènement
+        </button>
       </div>
     </div>
   );
 };
-
 export default MyAccount;

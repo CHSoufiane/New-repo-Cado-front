@@ -1,62 +1,64 @@
-//@use '../../styles/variables' as v;
-.WebsiteName {
-  margin-top: 4rem;
-  margin-bottom: 4rem; // A MODIFIER
-}
+// @use '../../styles/variables' as v;
 
 .Login {
   text-align: center;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url('/src/assets/14.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  padding-bottom: 2rem;
 }
 
-h2 {
-  margin: 4rem;
+.Login__Title {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  font-size: 3rem;
 }
 
-.Website__Title {
-  margin-left: 15rem;
-  margin-top: 3rem;
-  font-size: x-large;
-}
 
 .Login__email {
   margin-bottom: 0.3rem;
+  margin-top: 2rem;
+  font-size: 1.2rem;
 }
 
 .Login__password {
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
+  font-size: 1.2rem;
 }
 
 .Login__newAccount {
   margin-bottom: 1.25rem;
+  margin-top: 5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.Login__confirmation {
+.Login__Form {
+  width: 30%;
   display: flex;
-  flex-direction: row;
-  margin: auto;
-  margin-bottom: 2.5rem;
-  width: 7.5%;
-  padding: 0.2rem 1.9rem;
-  border-radius: 0.2rem;
-  border: none;
-  background: #000000;
-  color: #dfdedf;
+  flex-direction: column;
+  margin: 3.5rem auto;
+  border: solid black 0.4rem;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  font-size: 1.5rem;
+  background-color: #f0c87e;
 }
 
-.Login__createAccount {
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-  margin-bottom: 2.5rem;
-  width: 7.5%;
-  padding: 0.2rem 2rem;
-  border-radius: 0.2rem;
-  border: none;
-  background: #000000;
-  color: #dfdedf;
-}
 
-.Login__confirmation,
-.Login__createAccount {
-  cursor: pointer;
+@media (max-width: 720px) {
+  .Login__h2 {
+    font-size: 2rem;
+    width: 80%;
+  }
+  .Login__Form {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

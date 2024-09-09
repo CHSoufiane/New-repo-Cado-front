@@ -2,25 +2,49 @@
 
 .PersonalData {
   text-align: center;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url('/src/assets/14.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  background-attachment: fixed;
 }
 
-.Website__Title {
+.PersonalData__Title {
   text-align: center;
-  // margin-left: 15rem;
   margin-top: 3rem;
-  font-size: x-large;
+  font-size: 3rem;
 }
 
-.PersonalData__confirmation {
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-  margin-bottom: 2.5rem;
-  width: 7.5%;
-  padding: 0.2rem 1.2rem;
-  border-radius: 0.2rem;
-  border: none;
+.PersonalData__details {
+  border: solid black 0.4rem;
+  border-radius: 0.5rem;
+  padding: 4rem 1rem;
+  font-size: 1.5rem;
+  background-color: #f0c87e;
+  width: 40%;
+  margin: 3.5rem auto 16rem auto;
+}
 
-  background: #000000;
-  color: #dfdedf;
+.PersonalData__item {
+  text-align: left;
+  margin-left: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 720px) {
+  .PersonalData__Title {
+    font-size: 2.5rem;
+    width: 80%;
+  }
+  .PersonalData__details {
+    width: 90%;
+  }
+  .PersonalData__item {
+    text-align: left;
+  }
 }

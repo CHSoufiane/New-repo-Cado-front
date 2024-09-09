@@ -1,9 +1,14 @@
-import { Link } from 'react-router-dom';
+
+// import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import homeImage from '../../../../public/FavIcon.png';
+
 
 import './HomePage.scss';
 
 function HomePage() {
+  const navigate = useNavigate();
+
   return (
     <div className="home">
       <h1 className="home__title">Bienvenue sur Cad'O</h1>
@@ -27,13 +32,15 @@ function HomePage() {
             Créez votre évènement dès maintenant !
           </h3>
 
-          <Link to="/se-connecter">
-            <button type="button" className="account-creation-button">
-              Créer mon compte
-            </button>
-          </Link>
+          <button
+            type="button"
+            className="account-creation-button"
+            onClick={() => navigate('/creer-un-evenement')}
+          >
+            Créer évènement
+          </button>
+
         </div>
-        <img className="home__image" src={homeImage} alt="" />
       </div>
     </div>
   );

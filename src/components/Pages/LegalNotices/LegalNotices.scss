@@ -3,7 +3,7 @@
 .LegalNotices-title {
   margin-left: 10rem;
   padding-top: 3rem;
-  font-size: x-large;
+  font-size: 2.5rem;
 }
 
 .LegalNotices-date,
@@ -17,7 +17,7 @@
   width: 50%;
 }
 
-h3 {
+.LegalNotices-h3 {
   margin-left: 7.5rem;
 }
 
@@ -27,4 +27,18 @@ h3 {
 
 .LegalNotices-preface {
   margin-left: 5rem;
+}
+
+@media (max-width: 720px) {
+  .LegalNotices-title,
+  .LegalNotices-date,
+  .LegalNotices-preface,
+  .LegalNotices-editor,
+  .LegalNotices-host,
+  .LegalNotices-websiteAccess,
+  .LegalNotices-CollectData,
+  .LegalNotices-h3 {
+    margin-left: 0.5rem;
+    width: 95%;
+  }
 }
