@@ -1,6 +1,8 @@
+
 // import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import homeImage from '../../../../public/FavIcon.png';
+
 
 import './HomePage.scss';
 
@@ -37,8 +39,8 @@ function HomePage() {
           >
             Créer évènement
           </button>
+
         </div>
-        <img className="home__image" src={homeImage} alt="" />
       </div>
     </div>
   );

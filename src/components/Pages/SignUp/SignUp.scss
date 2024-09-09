@@ -12,26 +12,28 @@
   margin: auto;
   border-radius: 0.5rem;
   background-color: #f0c87e;
+  margin-bottom: 6.3rem;
 }
 
-h2 {
+.SignUp__h1 {
+  font-size: 3rem;
+  margin-top: 3rem;
+}
+.SignUp__h2 {
   margin: 2.5rem;
+  font-size: 2rem;
 }
 .SignUp__confirmation {
   display: flex;
-  flex-direction: row;
-  margin: auto;
-  margin-bottom: 2.5rem;
-  margin-top: 2.5rem;
-  width: auto;
-  padding: 0.2rem 2.5rem;
-  border-radius: 0.2rem;
-  border: none;
+  margin: 2rem auto;
+  padding: 0.2rem 1.9rem;
+  border-radius: 0.5rem;
   background: #000000;
-  color: #dfdedf;
+  color: #dfdedf; 
+  cursor: pointer;
 }
 
-.Website__title {
+.SignUp__title {
   text-align: center;
   margin-top: 4rem;
   margin-bottom: 5rem;
@@ -60,4 +62,33 @@ h2 {
 
 input {
   background-color: white;
+}
+
+.SignUp__Page {
+  text-align: center;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url('/src/assets/14.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.Input {
+  font-size: 1.3rem;
+}
+
+@media (max-width: 720px) {
+  .SignUp__h1 {
+    font-size: 2rem;
+    width: 80%;
+    margin: auto;
+  }
+  .SignUp {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

@@ -1,40 +1,108 @@
 // @use '../../styles/variables' as v;
 
-
 .MyEvents {
   text-align: center;
+
+
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url('/src/assets/14.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  background-attachment: fixed;
+
 }
 
-h2 {
-  margin: 2.5rem;
-}
-
-.Website__Title {
+.MyEvents__Title {
   text-align: center;
   margin-top: 3rem;
   margin-bottom: 3rem;
   font-size: x-large;
 }
 
-.MyEvent__confirmation {
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-  margin-bottom: 2.5rem;
-  width: 7.5%;
-  background: #000000;
-  color: #dfdedf;
-  padding: 0.2rem 1.9rem;
-  border-radius: 0.2rem;
-  border: none;
+.MyEvent__Details {
+  border: solid black 0.4rem;
+  border-radius: 0.5rem;
+  padding: 0rem 1rem;
+  font-size: 1.5rem;
+  background-color: #f0c87e;
+  width: 50%;
+  margin-left: 10rem;
 }
 
-.my-events-paragraph {
-  margin: 1rem;
-  border: solid black 0.3px;
+.MyEvents__container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5rem;
-  border-radius: 0.2rem;
+  flex-direction: row;
+}
+
+.MyEvents__Button {
+  margin-top: 2rem;
+  margin-left: 10rem;
+  font-size: 2rem;
+}
+
+.MyEvents__h1 {
+  margin-bottom: 5rem;
+}
+
+.MyEvent__Title {
+  font-size: 2rem;
+  margin-bottom: 1.8rem;
+}
+
+.MyEvent__Date,
+.MyEvent__Participant {
+  text-align: left;
+  margin-left: 4rem;
+}
+
+.MyEvent__h3 {
+  text-align: left;
+  font-weight: bold;
+  margin-left: 2rem;
+  margin-top: 1.5rem;
+}
+
+.MyEvent__Participants-List {
+  margin-bottom: 3rem;
+}
+
+.MyEvent__Event-creation-button {
+  margin-left: 10rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+@media (max-width: 720px) {
+  .MyEvents__Title {
+    width: 80%;
+    font-size: 1.5rem;
+    margin: auto;
+    margin-top: 2.5rem;
+  }
+  .MyEvents__container {
+    display: flex;
+    flex-direction: column;
+  }
+  .MyEvents__List {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .MyEvents__Button {
+    font-size: 1rem;
+    height: auto;
+    margin: auto;
+    margin-bottom: 1rem;
+  }
+  .MyEvent__Details {
+    width: 95%;
+    margin: auto;
+  }
+  .MyEvent__Event-creation-button {
+    margin: 3rem auto;
+  }
 }

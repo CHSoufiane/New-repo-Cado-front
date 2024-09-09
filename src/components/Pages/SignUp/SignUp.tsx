@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import './SignUp.scss';
-import React, { useState } from 'react';
-// import Header from '../../Elements/Header/Header';
-// import Footer from '../../Elements/Footer/Footer';
+
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
   const [name, setName] = useState('');
@@ -10,27 +10,30 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [signUpStatus, setSignUpStatus] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // API call
-    // 'http://165.227.232.51:3000/register/' API ROUTE
+  const navigate = useNavigate();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     fetch('https://cado.zapto.org/register/', {
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
-      headers: {
+      headers: { 
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then((data) => {
         if (data.name && data.email && data.password) {
           setSignUpStatus('Inscription réussie !');
           setName('');
           setEmail('');
           setPassword('');
+          navigate('/se-connecter'); // Redirect to the login page
         } else {
           setSignUpStatus("Échec de l'inscription : Données manquantes");
         }
@@ -43,16 +46,17 @@ function SignUp() {
         setPassword('');
       });
   };
-
   return (
-    <div className="WebsiteName">
-      <header className="Website__title">
-        <h1>Organisez rapidement vos évènements</h1>
+    <div className="SignUp__Page">
+      <header className="SignUp__title">
+        <h1 className="SignUp__h1"> Organisez rapidement vos évènements</h1>
       </header>
       <div className="SignUp">
-        <h2>Inscription</h2>
+        <h2 className="SignUp__h2">Inscription</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Nom:</label>
+          <label htmlFor="name" className="Input">
+            Nom :
+          </label>
           <input
             className="SignUp__name"
             type="text"
@@ -61,7 +65,9 @@ function SignUp() {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email" className="Input">
+            Email :
+          </label>
           <input
             className="SignUp__email"
             type="email"
@@ -71,7 +77,8 @@ function SignUp() {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <label htmlFor="password">Mot de passe:</label>
+          <label htmlFor="password" className="Input">Mot de passe :</label>
+
           <input
             className="SignUp__password"
             type="password"
@@ -81,9 +88,8 @@ function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
           />
           {signUpStatus && <p>{signUpStatus}</p>}
-
           <button className="SignUp__confirmation" type="submit">
-            S&apos;inscrire
+            S'inscrire
           </button>
         </form>
       </div>

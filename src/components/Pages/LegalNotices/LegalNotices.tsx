@@ -13,28 +13,28 @@ function LegalNotices() {
         mollis condimentum enim, in scelerisque nulla lobortis non.
       </p>
       <div className="LegalNotices-content" />
-      <h3>ARTICLE 1 - L'EDITEUR</h3>
+      <h3 className="LegalNotices-h3">ARTICLE 1 - L'EDITEUR</h3>
       <p className="LegalNotices-editor">
         Nam lacinia nisi at augue dictum cursus. Vestibulum non vestibulum leo.
         Pellentesque auctor consectetur eros, quis aliquam erat. Aliquam erat
         volutpat. Pellentesque at velit auctor, vulputate orci in, pellentesque
         lorem.
       </p>
-      <h3>ARTICLE 2 - L'HEBERGEUR</h3>
+      <h3 className="LegalNotices-h3">ARTICLE 2 - L'HEBERGEUR</h3>
       <p className="LegalNotices-host">
         Nam lacinia nisi at augue dictum cursus. Vestibulum non vestibulum leo.
         Pellentesque auctor consectetur eros, quis aliquam erat. Aliquam erat
         volutpat. Pellentesque at velit auctor, vulputate orci in, pellentesque
         lorem.
       </p>
-      <h3>ARTICLE 3 - ACCES AU SITE</h3>
+      <h3 className="LegalNotices-h3">ARTICLE 3 - ACCES AU SITE</h3>
       <p className="LegalNotices-websiteAccess">
         Nam lacinia nisi at augue dictum cursus. Vestibulum non vestibulum leo.
         Pellentesque auctor consectetur eros, quis aliquam erat. Aliquam erat
         volutpat. Pellentesque at velit auctor, vulputate orci in, pellentesque
         lorem.
       </p>
-      <h3>ARTICLE 4 - COLLECTE DES DONNEES</h3>
+      <h3 className="LegalNotices-h3">ARTICLE 4 - COLLECTE DES DONNEES</h3>
       <p className="LegalNotices-CollectData">
         Fusce venenatis elit et ante bibendum, et luctus magna dignissim.
         Curabitur maximus eleifend quam, imperdiet aliquam mi interdum id. Cras

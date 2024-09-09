@@ -5,9 +5,7 @@ import { useEffect, useState } from 'react';
 const MyAccount = () => {
   const [user, setUser] = useState('');
   const [error, setError] = useState('');
-
   const navigate = useNavigate();
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -15,7 +13,6 @@ const MyAccount = () => {
           method: 'GET',
           credentials: 'include', // Assurez-vous que les cookies sont inclus dans la requête
         });
-
         const data = await response.json();
         console.log('data', data);
         if (response.ok) {
@@ -27,7 +24,6 @@ const MyAccount = () => {
         setError('An error occurred. Please try again.');
       }
     };
-
     fetchUserData();
   }, []);
 
@@ -37,9 +33,16 @@ const MyAccount = () => {
         <h1 className="MyAccount__h1">Mon compte</h1>
       </header>
       <p className="MyAccount-WelcomeMessage">
-        {`Bienvenue ${user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1).toLowerCase()} !`}
-      </p>
 
+        {`Bienvenue ${user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1).toLowerCase()} !`}
+
+
+        Bienvenue {''}
+        {user?.name?.charAt(0).toUpperCase() +
+          user?.name?.slice(1).toLowerCase()}      
+        {''} !
+
+      </p>
       <div className="MyAccount__Buttons">
         <button
           className="MyAccount__personalData"
@@ -47,12 +50,14 @@ const MyAccount = () => {
         >
           Données personnelles
         </button>
+
         <button
           className="MyAccount__MyEvents"
           onClick={() => navigate('/mes-evenements')}
         >
           Mes évènements
         </button>
+
         <button
           className="MyAccount__CreateEvent"
           onClick={() => navigate('/creer-un-evenement')}

@@ -24,7 +24,6 @@ const App = () => {
   return (
     <Router>
       <Header />
-
       <Routes>
         <Route path="/se-connecter" element={<Login />} />
         <Route path="/s-inscrire" element={<SignUp />} />

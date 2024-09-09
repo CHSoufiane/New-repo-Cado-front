@@ -1,73 +1,127 @@
+
+// Importation des hooks et des styles nécessaires
+import React, { useState, useEffect } from 'react';
 import './EventDetails.scss';
 
-function EventDetails() {
+// Définition des interfaces pour les participants et les événements
+
+import React, { useState } from 'react';
+//import { myEvents } from '../MyEvents/MyEvents';
+import './EventDetails.scss';
+
+interface Participant {
+  name: string;
+  email: string;
+}
+
+interface Event {
+  name: string;
+  date: string;
+  participants: Participant[];
+}
+
+
+// Composant pour afficher les détails d'un participant
+const ParticipantDetails: React.FC<{ participant: Participant }> = ({
+  participant,
+}) => (
+  // Affiche le nom et l'email du participant
+  <div className="event-details__participant">
+    <input
+      className="event-details__participant__input-name"
+      type="text"
+      value={participant.name}
+      readOnly
+    />
+    <input
+      className="event-details__participant__input-email"
+      type="text"
+      value={participant.email}
+      readOnly
+    />
+  </div>
+);
+
+// Composant principal pour afficher les détails d'un événement
+const EventDetails: React.FC = () => {
+  // Utilisation du hook useState pour gérer l'état de l'événement et de l'erreur
+  const [event, setEvent] = useState<Event | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  // Utilisation du hook useEffect pour effectuer la requête API au montage du composant
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Effectue la requête API et met à jour l'état de l'événement avec les données reçues
+        const response = await fetch('http://165.227.232.51:3000/create-event');
+        const data = await response.json();
+        setEvent(data);
+      } catch (error) {
+        // En cas d'erreur, met à jour l'état de l'erreur avec un message d'erreur
+        setError('Une erreur est survenue lors du chargement des données.');
+      }
+    };
+
+    // Appelle la fonction fetchData
+    fetchData();
+  }, []);
+
+  // Si une erreur est survenue, affiche le message d'erreur
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  // Si les données ne sont pas encore chargées, affiche "Loading..."
+  if (!event) {
+    return <div>Loading...</div>;
+  }
+
+  // Affiche les détails de l'événement
+
+const EventDetails: React.FC = () => {
+  const [event, setEvent] = useState<Event>(myEvents[0]); // Utilisez le premier événement comme état initial
   return (
     <div className="event-details-page">
       <button className="myevents-button"> Tous mes évènements</button>
-      <h1 className="event-details__title">Nom de l'évènement</h1>
+      <h1 className="event-details__title">{event.name}</h1>
 
       <form className="event-details">
         <div className="event-details__element">
           <h3>Nom de l'évènement :</h3>
-          <input type="text" placeholder="Nom de l'évènement" />
+          <input type="text" value={event.name} readOnly />
         </div>
         <div className="event-details__element">
           <h3>Date de l'évènement :</h3>
-          <input type="text" placeholder="JJ/MM/AAAA" />
-        </div>
-        <div className="event-details__element">
-          <h3>Description :</h3>
-          <input type="text" placeholder="Description" />
+          <input type="text" value={event.date} readOnly />
         </div>
         <div className="event-details__element">
           <h3>Participants :</h3>
 
-          <div className="event-details__participants">
-            <div className="event-details__participant">
-              <input
-                className="event-details__participant__input-name"
-                type="text"
-                placeholder="Nom du participant"
-              />
-              <input
-                className="event-details__participant__input-email"
-                type="text"
-                placeholder="E-mail du participant"
-              />
-            </div>
-            <div className="event-details__participant">
-              <input
-                className="event-details__participant__input-name"
-                type="text"
-                placeholder="Nom du participant"
-              />
-              <input
-                className="event-details__participant__input-email"
-                type="text"
-                placeholder="E-mail du participant"
-              />
-            </div>
-            <button className="event-details__participants__add-button">
-              +
-            </button>
-          </div>
-        </div>
-        <div className="event-details__element">
-          <h3>Budget :</h3>
-          <input type="text" placeholder="Budget maximum par cadeau" />
-        </div>
+          {/* Pour chaque participant, affiche les détails du participant */}
+          {event.participants.map((participant, index) => (
+            <ParticipantDetails key={index} participant={participant} />
 
-        <div className="event-details__buttons-container">
-          <button className="event-details__save-button">
-            Enregistrer les modifications
-          </button>
-          <button className="event-details__delete-button">
-            Supprimer l'évènement
-          </button>
+          {event.participants.map((participant, index) => (
+            <div key={index} className="event-details__participant">
+              <input
+                className="event-details__participant__input-name"
+                type="text"
+                value={participant.name}
+                readOnly
+              />
+              <input
+                className="event-details__participant__input-email"
+                type="text"
+                value={participant.email}
+                readOnly
+              />
+            </div>
+          ))}
         </div>
       </form>
     </div>
   );
-}
+};
 
+// Exporte le composant pour pouvoir l'utiliser ailleurs
 export default EventDetails;

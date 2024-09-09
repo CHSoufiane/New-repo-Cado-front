@@ -1,5 +1,4 @@
-// src/services/authService.ts
-
+// src/ceeirssv / authService.ts;
 export interface AuthResponse {
   user: {
     id: number;
@@ -8,7 +7,6 @@ export interface AuthResponse {
   };
   token: string;
 }
-
 export const login = async (
   email: string,
   password: string
@@ -18,17 +16,14 @@ export const login = async (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify({ email, password }),
     credentials: 'include',
   });
-
   if (!response.ok) {
     const message = await response.json();
     throw new Error(message.message);
   }
-
   const data = await response.json();
   return {
     user: {
