@@ -3,6 +3,8 @@ import DOMPurify from 'dompurify';
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import { escapeHtml } from '../../../Hooks/escapeHtml';
 
+import baseApi from '../../../Services/baseApi';
+
 const PersonalData = () => {
   const [userData, setUserData] = useState({
     name: '',
@@ -19,7 +21,9 @@ const PersonalData = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+
         const response = await fetch('http://localhost:3000/me', {
+
           method: 'GET',
           credentials: 'include',
         });
@@ -30,10 +34,12 @@ const PersonalData = () => {
           password: data.password,
         });
       } catch (error) {
+
         reportError({
           message: 'Erreur lors de la récupération de vos données utilisateur:',
           error,
         });
+
       }
     };
 
@@ -98,6 +104,7 @@ const PersonalData = () => {
         <h1 className="PersonalData__Title">Données personnelles</h1>
       </header>
       <div className="PersonalData__details">
+
         {isEditing ? (
           <form onSubmit={handleSubmit}>
             <div>

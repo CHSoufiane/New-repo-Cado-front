@@ -1,5 +1,16 @@
 import './MyEvents.scss';
+
+import React, { useState } from 'react';
+
+function MyEvent() {
+  const [selectedEvent, setSelectedEvent] = useState<string>('');
+
+  const handleEventClick = (event: string) => {
+    setSelectedEvent(event);
+  };
+
 import { useNavigate } from 'react-router-dom';
+
 import { useState, useEffect, SetStateAction } from 'react';
 
 function MyEvent({ user }: { user: any }) {
@@ -27,6 +38,7 @@ function MyEvent({ user }: { user: any }) {
 
   const fetchEvents = async () => {
     try {
+
       const response = await fetch('http://localhost:3000/me', {
         method: 'GET',
         credentials: 'include',
@@ -41,6 +53,7 @@ function MyEvent({ user }: { user: any }) {
   useEffect(() => {
     fetchEvents();
   }, [user]);
+
 
   const handleEventClick = (
     event: SetStateAction<{
@@ -177,14 +190,39 @@ function MyEvent({ user }: { user: any }) {
     if (name === 'participantName') setNewParticipantName(value);
     if (name === 'participantEmail') setNewParticipantEmail(value);
   };
-
   return (
     <div className="MyEvents">
       <header className="MyEvents__Title">
         <h1 className="MyEvents__h1">Mes évènements</h1>
       </header>
+
+      <div className="MyEvent">
+        <button type="button" onClick={() => handleEventClick('Événement 1')}>
+          Événements 1
+        </button>
+        <button type="button" onClick={() => handleEventClick('Événement 2')}>
+          Événements 2
+        </button>
+        <button type="button" onClick={() => handleEventClick('Événement 3')}>
+          Événements 3
+        </button>
+        <button type="button" onClick={() => handleEventClick('Événement 4')}>
+          Événements 4
+        </button>
+
+        {selectedEvent && (
+          <div>
+            <h2>{selectedEvent}</h2>
+            <p>Détails de l&apos;événement...</p>
+          </div>
+        )}
+
+        <h2>Nouvel événement</h2>
+        <button className="MyEvent__confirmation" type="button">
+
       <div className="MyEvents__container">
         <div className="MyEvents__List">
+
           {events.map((event) => (
             <button
               className="MyEvents__Button"
@@ -199,6 +237,7 @@ function MyEvent({ user }: { user: any }) {
         {selectedEvent && (
           <div className="MyEvent__Details">
             <h2 className="MyEvent__Title">
+
               Nom : {selectedEvent.name.toUpperCase()}
             </h2>
             <h3 className="MyEvent__h3">Date :</h3>

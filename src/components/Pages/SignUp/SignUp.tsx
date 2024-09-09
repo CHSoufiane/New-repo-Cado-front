@@ -3,6 +3,7 @@ import './SignUp.scss';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import baseApi from '../../../Services/baseApi';
 
 function SignUp() {
   const [name, setName] = useState('');
@@ -14,7 +15,9 @@ function SignUp() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     fetch('http://localhost:3000/register/', {
+
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
       headers: {
