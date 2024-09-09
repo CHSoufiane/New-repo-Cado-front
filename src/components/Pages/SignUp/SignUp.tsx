@@ -15,7 +15,9 @@ function SignUp() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetch(`${baseApi}/register`, {
+
+    fetch('http://localhost:3000/register/', {
+
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
       headers: {

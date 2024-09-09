@@ -3,7 +3,6 @@
 .MyEvents {
   text-align: center;
 
-
   background-image: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -13,7 +12,6 @@
   background-size: cover;
   overflow: hidden;
   background-attachment: fixed;
-
 }
 
 .MyEvents__Title {
@@ -104,5 +102,8 @@
   }
   .MyEvent__Event-creation-button {
     margin: 3rem auto;
+  }
+  .MyEvent__Delete-Button {
+    text-align: center;
   }
 }

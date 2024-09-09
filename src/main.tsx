@@ -36,7 +36,7 @@ const App = () => {
           }
         />
         <Route
-          path="/resultat"
+          path="/resultat/:token"
           element={
             <ProtectedRoute>
               <DrawResult />

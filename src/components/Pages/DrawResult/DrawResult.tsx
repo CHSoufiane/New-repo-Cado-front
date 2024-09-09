@@ -1,116 +1,89 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import './DrawResult.scss';
 
-// fictive list of participants to test the feature
-const participants = ['Shakira', 'Beyoncé', 'Babar', 'Neymar', 'Pikachu'];
-
-// preparing the code for when the draw API is ready
-// interface Giver {
-//   giverName: string;
-// }
-//
-// interface Participants [{
-//   participantName: string;
-// }]
-//
-// interface Receiver {
-//   receiverName: string;
-// }
-
-interface Event {
-  name: string;
-  date: string;
+interface DrawResults {
+  giver: string;
+  receiver: string;
+  event_id: number;
 }
 
-function DrawResult() {
-  // states specific to the drawing
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+function DrawResults() {
+  const [drawPair, setDrawPair] = useState<DrawResults | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null); // Correction du type d'erreur
+  const { token } = useParams();
 
-  // preparing the code for when the draw API is ready
-  // //states specific to the event
-  // const [event, setEvent] = useState<Event | null>(null);
-  // const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    const fetchDrawPair = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/view/${token}`);
+        if (!response.ok) {
+          throw new Error('Erreur lors de la récupération des résultats');
+        }
+        const data = await response.json();
+        console.log(data);
+        setDrawPair(data);
+      } catch (error: any) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleDraw = (e) => {
-    e.preventDefault();
+    fetchDrawPair();
+  }, [token]);
 
-    // once the button is clicked, we disable it so that the user can not click again
-    setIsButtonClicked(true);
-    setIsButtonDisabled(true);
-
-    let index = 0;
-
-    const intervalId = setInterval(() => {
-      setCurrentIndex(index);
-      index = (index + 1) % participants.length;
-    }, 50);
-
-    setTimeout(() => {
-      clearInterval(intervalId);
-
-      const randomIndex = Math.floor(Math.random() * participants.length);
-      setCurrentIndex(randomIndex);
-    }, 2000);
+  const fetchDrawResults = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/events/${event}/draw-results`,
+        {
+          method: 'GET',
+          credentials: 'include',
+        }
+      );
+      const data = await response.json();
+      setSelectedEvent((prevEvent) => ({ ...prevEvent, drawResults: data })); // Met à jour les résultats du tirage
+    } catch (error) {
+      console.error(
+        'Erreur lors du chargement des résultats du tirage:',
+        error
+      );
+    }
   };
 
-  // preparing the code for when the draw API is ready
-  // const fetchEvent = async () => {
-  //   try {
-  //     const response = await fetch('https://cado.zapto.org/me', {
-  //       // à vérifier pour fetch les bonnes données des événements
-  //       method: 'GET',
-  //       credentials: 'include',
-  //     });
-  //     const data = await response.json();
-  //     console.log(data);
-  //     setEvent(data.events);
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.error('Erreur lors du chargement des événements:', error);
-  //   }
-  // };
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
-  // useEffect(() => {
-  //   fetchEvent();
-  // }, [user]);
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
-    <div className="draw-result-page">
-      <h1 className="draw-result__title">Bienvenue (prénom) !</h1>
-      {/* for when the API is ready */}
-      {/* <h1 className="draw-result__title">Bienvenue {giver.name} !</h1> */}
+    <div className="DrawResult">
+      <h3>Résultats du tirage:</h3>
+      {selectedEvent?.drawResults ? (
+        <ul>
+          {selectedEvent.drawResults.map((result, index) => (
+            <li key={index}>
+              {result.giver} offre un cadeau à {result.receiver}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Aucun résultat de tirage trouvé</p>
+      )}
 
-      <p className="draw-text">
-        Tu es invité(e) à participer à l'évènement (Nom de l'évènement), le
-        (JJ/MM/AAAA).
-      </p>
-      {/* for when the API is ready */}
-      {/* <p className="event-details">
-        Tu es invité(e) à participer à l'évènement (Nom de l'évènement), le (JJ/MM/AAAA).
-      </p> */}
-
-      <p className="draw-text">
-        {' '}
-        La personne à qui tu devras offrir un cadeau est...
-      </p>
-      <button
-        className="draw-button"
-        onClick={handleDraw}
-        disabled={isButtonDisabled}
-      >
-        Clique ici !
-      </button>
-      <div className="draw-roulette">
-        {!isButtonClicked ? (
-          <p className="placeholder">?</p>
-        ) : participants[currentIndex] ? (
-          <p className="result"> {participants[currentIndex]} </p>
-        ) : null}
-      </div>
+      <h2>Résultat du tirage</h2>
+      {drawPair ? (
+        <p>Votre Secret Santa est : {drawPair.receiver}</p>
+      ) : (
+        <p>Aucun résultat disponible pour le tirage.</p>
+      )}
     </div>
   );
 }
 
-export default DrawResult;
+export default DrawResults;

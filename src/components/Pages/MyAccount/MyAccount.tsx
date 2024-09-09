@@ -1,17 +1,20 @@
 import './MyAccount.scss';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useAuth } from '../../../Hooks/useAuth';
 
 import baseApi from '../../../Services/baseApi';
 
 const MyAccount = () => {
+  useAuth();
   const [user, setUser] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`${baseApi}/me`, {
+
+        const response = await fetch('http://localhost:3000/me', {
           method: 'GET',
           credentials: 'include', // Assurez-vous que les cookies sont inclus dans la requête
         });
@@ -36,8 +39,9 @@ const MyAccount = () => {
       </header>
       <p className="MyAccount-WelcomeMessage">
 
-        {`Bienvenue ${user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1).toLowerCase()} !`}
 
+
+        {`Bienvenue ${user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1).toLowerCase()} !`}
 
         Bienvenue {''}
         {user?.name?.charAt(0).toUpperCase() +
