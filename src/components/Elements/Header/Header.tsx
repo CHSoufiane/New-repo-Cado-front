@@ -7,12 +7,6 @@ import './Header.scss';
 const Header: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
-
-  const logout = () => {
-    localStorage.removeItem('token'); // Supprime le token du localStorage
-    navigate('/se-connecter'); // Redirige l'utilisateur vers la page de connexion
-
   const [isAuthenticated, setIsAuthenticated] = useState(
     !!localStorage.getItem('authData')
   );
@@ -59,12 +53,6 @@ const Header: React.FC = () => {
     ].includes(location.pathname)
   ) {
     buttons = (
-
-      <div>
-        <button onClick={() => navigate('/mon-compte')}>Mon Compte</button>
-        <button onClick={logout}>Déconnexion</button>{' '}
-        {/* Utilise la fonction logout */}
-
       <div className="Buttons-container">
         <button className="Button" onClick={() => navigate('/mon-compte')}>
           Mon Compte
@@ -78,9 +66,7 @@ const Header: React.FC = () => {
     buttons = (
       <div>
         <button onClick={logout}>Déconnexion</button>{' '}
-
         {/* Utilise la fonction logout */}
-
       </div>
     );
   } else if (location.pathname === '/se-connecter') {
