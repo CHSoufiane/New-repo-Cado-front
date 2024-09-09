@@ -2,6 +2,8 @@ import './MyAccount.scss';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import baseApi from '../../../Services/baseApi';
+
 const MyAccount = () => {
   const [user, setUser] = useState('');
   const [error, setError] = useState('');
@@ -9,7 +11,7 @@ const MyAccount = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('https://cado.zapto.org/me', {
+        const response = await fetch(`${baseApi}/me`, {
           method: 'GET',
           credentials: 'include', // Assurez-vous que les cookies sont inclus dans la requête
         });
@@ -39,7 +41,7 @@ const MyAccount = () => {
 
         Bienvenue {''}
         {user?.name?.charAt(0).toUpperCase() +
-          user?.name?.slice(1).toLowerCase()}      
+          user?.name?.slice(1).toLowerCase()}
         {''} !
 
       </p>
