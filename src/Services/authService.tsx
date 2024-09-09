@@ -1,6 +1,4 @@
 // src/ceeirssv / authService.ts;
-import baseApi from './baseApi';
-
 export interface AuthResponse {
   user: {
     id: number;
@@ -13,16 +11,12 @@ export const login = async (
   email: string,
   password: string
 ): Promise<AuthResponse> => {
-
   // http://165.227.232.51/:3000/login/ API
-
-  // http://165.227.232.51/:5000/login/ API
-  // https://cado.zapto.org/login/
-  const response = await fetch(`${baseApi}/login/`, {
-
+  const response = await fetch('http://localhost:3000/login/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify({ email, password }),
     credentials: 'include',

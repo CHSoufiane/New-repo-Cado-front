@@ -12,7 +12,7 @@ function CreateEvent() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('https://cado.zapto.org/me', {
+        const response = await fetch('http://localhost:3000/me', {
           method: 'GET',
           credentials: 'include',
         });
@@ -47,7 +47,7 @@ function CreateEvent() {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const API = 'https://cado.zapto.org/create-event';
+    const API = 'https://localhots:3000/';
     if (!name || !date || !participants) {
       setErrorMessage('Veuillez remplir tous les champs obligatoires');
       return;

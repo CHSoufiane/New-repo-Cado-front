@@ -17,7 +17,7 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState('');
   // Initializing the useNavigate hook for page navigation
   const navigate = useNavigate();
- 
+
   // Using the useEffect hook to validate email and password on each change
   useEffect(() => {
     // Checking the validity of the email

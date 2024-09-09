@@ -4,7 +4,7 @@
   text-align: center;
   border: solid black 0.4rem;
   width: 700px;
-  height: 500px;
+  height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +29,7 @@
   padding: 0.2rem 1.9rem;
   border-radius: 0.5rem;
   background: #000000;
-  color: #dfdedf; 
+  color: #dfdedf;
   cursor: pointer;
 }
 
@@ -45,7 +45,8 @@
 
 .SignUp__name,
 .SignUp__email,
-.SignUp__password {
+.SignUp__password,
+.SignUp__confirmPassword {
   display: block;
   width: 105%;
   margin: 0 auto 0.3rem auto;
@@ -57,6 +58,10 @@
 }
 
 .SignUp__password {
+  margin-bottom: 1.5rem;
+}
+
+.SignUp__confirmPassword {
   margin-bottom: 1.5rem;
 }
 
