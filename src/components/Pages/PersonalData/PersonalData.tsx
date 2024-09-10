@@ -21,9 +21,7 @@ const PersonalData = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-
         const response = await fetch('http://localhost:3000/me', {
-
           method: 'GET',
           credentials: 'include',
         });
@@ -34,12 +32,10 @@ const PersonalData = () => {
           password: data.password,
         });
       } catch (error) {
-
         reportError({
           message: 'Erreur lors de la récupération de vos données utilisateur:',
           error,
         });
-
       }
     };
 
@@ -59,7 +55,6 @@ const PersonalData = () => {
 
     try {
       const response = await fetch('http://localhost:3000/me', {
-        // Utilisez le bon URL si besoin
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -74,7 +69,6 @@ const PersonalData = () => {
         setIsEditing(false);
         alert('Données mises à jour avec succès');
       } else {
-        // Affichez le message d'erreur si le serveur répond avec un statut d'erreur
         const errorText = await response.text();
         console.error('Erreur de mise à jour:', errorText);
         alert('Erreur lors de la mise à jour des données');
@@ -104,7 +98,6 @@ const PersonalData = () => {
         <h1 className="PersonalData__Title">Données personnelles</h1>
       </header>
       <div className="PersonalData__details">
-
         {isEditing ? (
           <form onSubmit={handleSubmit}>
             <div>

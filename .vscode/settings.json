@@ -27,5 +27,7 @@
   "cSpell.words": [
     "airbnb",
     "firstname"
-  ]
+  ],
+  "workbench.preferredDarkColorTheme": "Default Light+",
+  "workbench.preferredLightColorTheme": "Default Light+"
 }
