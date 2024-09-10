@@ -1,14 +1,9 @@
 import './MyEvents.scss';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-// interface Event {
-//   id: number;
-//   name: string;
-//   date: string;
-//   // Autres données ?
-// }
-function MyEvents({ user }) {
-  const [selectedEvent, setSelectedEvent] = useState(null);
+
+function MyEvents({ user }: { user: any }) {
+  const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [events, setEvents] = useState([]);
   const navigate = useNavigate();
   const handleEventClick = (event: any) => {
@@ -17,7 +12,6 @@ function MyEvents({ user }) {
   const fetchEvents = async () => {
     try {
       const response = await fetch('http://localhost:3000/me', {
-        // à vérifier pour fetch les bonnes données des événements
         method: 'GET',
         credentials: 'include',
       });
@@ -29,9 +23,11 @@ function MyEvents({ user }) {
       console.error('Erreur lors du chargement des événements:', error);
     }
   };
+
   useEffect(() => {
     fetchEvents();
   }, [user]);
+
   return (
     <div className="MyEvents">
       <header className="MyEvents__Title">
@@ -39,15 +35,16 @@ function MyEvents({ user }) {
       </header>
       <div className="MyEvents__container">
         <div className="MyEvents__List">
-          {events.map((event: { name: string }, index) => (
-            <button
-              className="MyEvents__Button"
-              key={index}
-              type="button"
-              onClick={() => handleEventClick(event)}
-            >
-              {event.name}
-            </button>
+          {events.map((event: { id: string; name: string }, index) => (
+            <div key={index} className="MyEvents__Item">
+              <button
+                className="MyEvents__Button"
+                type="button"
+                onClick={() => handleEventClick(event)}
+              >
+                {event.name}
+              </button>
+            </div>
           ))}
         </div>
         {selectedEvent && (

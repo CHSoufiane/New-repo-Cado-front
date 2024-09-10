@@ -13,7 +13,6 @@ const MyAccount = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-
         const response = await fetch('http://localhost:3000/me', {
           method: 'GET',
           credentials: 'include', // Assurez-vous que les cookies sont inclus dans la requête
@@ -38,16 +37,10 @@ const MyAccount = () => {
         <h1 className="MyAccount__h1">Mon compte</h1>
       </header>
       <p className="MyAccount-WelcomeMessage">
-
-
-
-        {`Bienvenue ${user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1).toLowerCase()} !`}
-
         Bienvenue {''}
         {user?.name?.charAt(0).toUpperCase() +
           user?.name?.slice(1).toLowerCase()}
         {''} !
-
       </p>
       <div className="MyAccount__Buttons">
         <button

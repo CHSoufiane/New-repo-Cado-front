@@ -11,7 +11,6 @@ export const login = async (
   email: string,
   password: string
 ): Promise<AuthResponse> => {
-  // http://165.227.232.51/:3000/login/ API
   const response = await fetch('http://localhost:3000/login/', {
     method: 'POST',
     headers: {

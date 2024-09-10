@@ -2,11 +2,19 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CreateEvent.scss';
 import { useNavigate } from 'react-router-dom';
+
 function CreateEvent() {
   const [errorMessage, setErrorMessage] = useState('');
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
-  const [user, setUser] = useState('');
+  interface User {
+    id: string;
+    name: string;
+    email: string;
+    token: string;
+  }
+
+  const [user, setUser] = useState<User | null>(null);
   const [participants, setParticipants] = useState([{ name: '', email: '' }]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -47,7 +55,7 @@ function CreateEvent() {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const API = 'https://localhots:3000/';
+    const API = 'http://localhost:3000/create-event';
     if (!name || !date || !participants) {
       setErrorMessage('Veuillez remplir tous les champs obligatoires');
       return;
