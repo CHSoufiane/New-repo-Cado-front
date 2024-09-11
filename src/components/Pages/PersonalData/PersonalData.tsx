@@ -10,10 +10,6 @@ const PersonalData = () => {
     password: '',
   });
 
-  const safeContent = escapeHtml(JSON.stringify(userData));
-
-  const cleanData = DOMPurify.sanitize(JSON.stringify(userData));
-
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -142,10 +138,10 @@ const PersonalData = () => {
         ) : (
           <div>
             <h2 className="PersonalData__item">
-              <strong>Nom :</strong> {userData.name}
+              <strong>Nom :</strong> {DOMPurify.sanitize(userData.name)}
             </h2>
             <h2 className="PersonalData__item">
-              <strong>Email :</strong> {userData.email}
+              <strong>Email :</strong> {DOMPurify.sanitize(userData.name)}
             </h2>
             <h2 className="PersonalData__item">
               <strong>Mot de passe :</strong>
