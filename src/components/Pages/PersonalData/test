@@ -1,0 +1,20 @@
+
+
+          <div>
+            <h2 className="PersonalData__item">
+              <strong>Nom :</strong> {userData.name}
+            </h2>
+            <h2 className="PersonalData__item">
+              <strong>Email :</strong> {userData.email}
+            </h2>
+            <h2 className="PersonalData__item">
+              <strong>Mot de passe :</strong>
+              {'*'.repeat(10)}
+            </h2>
+            <button
+              onClick={handleEditClick}
+              aria-label="Modifier les données personnelles"
+            >
+              Modifier
+            </button>
+          </div>
