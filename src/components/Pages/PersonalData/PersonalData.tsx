@@ -1,7 +1,6 @@
 import './PersonalData.scss';
 import DOMPurify from 'dompurify';
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
-import { escapeHtml } from '../../../Hooks/escapeHtml';
 
 const PersonalData = () => {
   const [userData, setUserData] = useState({
